@@ -312,6 +312,18 @@ class vwDrugTargets(models.Model):
         managed = False
         db_table = 'vw_DrugTargets'
 
+class vwDiseases(models.Model):
+    hgnc_id = models.TextField(db_column='HGNC_ID', primary_key=True)
+    gene_symbol = models.TextField(db_column='gene_symbol')
+    disease_name = models.TextField(db_column='condition')
+    concept_id = models.TextField(db_column='concept_id')
+    disease_id = models.TextField(db_column='disease_id')
+    source = models.TextField(db_column='Source')
+
+    class Meta:
+        managed = False
+        db_table = 'vw_Diseases'
+
 class vwGeneInfo(models.Model):
     gene_symbol = models.TextField(db_column='gene_symbol')
     approved_name = models.TextField(db_column='approved_name')

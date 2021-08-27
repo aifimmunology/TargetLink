@@ -2,7 +2,7 @@
     body { padding:20px;}
     .section { background-color:#e9e9e9;  border-radius: 10px; padding:5px; }
     .dataTables_length { display: none; }
-    .subtable { margin-left:40px;}
+    .subtables { margin-left:40px;}
 
     input[type="checkbox"] { margin-right: 10px; }
     ul { list-style: none;padding-right:20px; }
@@ -12,110 +12,150 @@
     .row.header { background-color:lightgray; }
     .row.header > div { border:1px solid gray;}
     .row.inset { margin: 0 75px 0 75px;}
+
+    .lds-dual-ring.hidden {
+        display: none;
+    }
+
+    #overlay{	
+        position: fixed;
+        top: 0;
+        z-index: 100;
+        width: 100%;
+        height:100%;
+        display: none;
+        background: rgba(0,0,0,0.6);
+    }
+    .cv-spinner {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;  
+        }
+    .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px #ddd solid;
+        border-top: 4px #2e93e6 solid;
+        border-radius: 50%;
+        animation: sp-anime 0.8s infinite linear;
+    }
+    @keyframes sp-anime {
+        100% { 
+            transform: rotate(360deg); 
+        }
+    }
+    .is-hide{
+        display:none;
+    }
 </style> 
 <h1>TargetLink</h1>
+<div id="overlay">
+    <div class="cv-spinner">
+      <span class="spinner"></span>
+    </div>
+</div>
 <div>
-        <table>
-            <tr>
-                <td>
-                    <form method="get">
-                        Enter either: 
-                    <ul>
-                        <li>a single gene symbol</li>
-                        <li>a list of gene symbols, one per line</li>
-                    </ul>
-                    <textarea id="txtGeneList" name="search_terms" rows="8">{%if search_terms != None %}{{ search_terms }}{% endif %}</textarea>
-                    <br />
-                    <input type="submit" value="Search" style="margin-top:5px;">
-                    <br><br>
-                    <i>Current Search: {{ search_terms }}</i><br>
-                </form>
-            </td>
-                <td valign="top">
-                    <div class="container section" style="margin-left:10px;max-width:2000px;">
-                        <div class="form-check" style="padding-left:10px;">
-                            <ul class="top">
-                                <li>		
-                                    <span>Gene Information</span>
-                                    <ul id="ulGeneInfo-details">
-                                        <li><input type="checkbox" data-column="0" checked/>Gene symbol</li>
-                                        <li><input type="checkbox" data-column="1" checked />Gene name</li>
-                                        <li><input type="checkbox" data-column="2" />Synonyms</li>
-                                        <li><input type="checkbox" data-column="3" checked />Gene Classes (HPA)</li>
-                                        <li><input type="checkbox" data-column="4" checked />Gene Categories (DGIdb)</li>
-                                        <li><input type="checkbox" data-column="5" checked />Gene Location</li>
-                                        <li><input type="checkbox" data-column="6" checked />Druggable</li>
-                                        <li><input type="checkbox" data-column="7" />Enzyme</li>
-                                        <li><input type="checkbox" data-column="8" />Kinase</li>
-                                        <li><input type="checkbox" data-column="9" />Transcription Factor</li>
-                                        <li><input type="checkbox" data-column="10" />Secreted</li>
-                                        <li><input type="checkbox" data-column="11" />Transmembrane</li>
-                                        <li><input type="checkbox" data-column="12" />HGNC ID</li>
-                                        <li><input type="checkbox" data-column="13" />Entrez ID</li>
-                                        <li><input type="checkbox" data-column="14" />Ensembl ID</li>
-                                        <li><input type="checkbox" data-column="15" />UniProt ID</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <ul class="top">
-                                <li>
-                                    <input type="checkbox" /><span>Drug Targets</span>
-                                    <ul>
-                                        <li><input type="checkbox" />DrugBank ID</li>
-                                        <li><input type="checkbox" />Drug Name</li>
-                                        <li><input type="checkbox" />Brand Names</li>
-                                        <li><input type="checkbox" />Drug Synonyms</li>
-                                        <li><input type="checkbox" />Actions</li>
-                                        <li><input type="checkbox" />Source</li>
-                                    </ul>
-                                </li>
-                            </ul>			<ul class="top">
-                                <li>
-                                    <input type="checkbox" /><span>Phenotype/Disease Information</span>
-                                    <ul>
-                                        <li><input type="checkbox" />Associated Condition (NCBI)</li>
-                                        <li><input type="checkbox" />Term Name (HPO</li>
-                                        <li><input type="checkbox" />Concept ID (MedGen)</li>
-                                        <li><input type="checkbox" />OMIM ID</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <ul class="top">
-                                <li>
-                                    <input type="checkbox" /><span>Protein Interactions</span>
-                                    <ul>
-                                        <li><input type="checkbox" />Gene 1 Symbol</li>
-                                        <li><input type="checkbox" />Gene 2 Symbol</li>
-                                        <li><input type="checkbox" />Score (HIPPIE)</li>
-                                        <li><input type="checkbox" />Score (STRING)</li>
-                                        <li><input type="checkbox" />Experiments</li>
-                                        <li><input type="checkbox" />In Vivo/In Vitro</li>
-                                        <li><input type="checkbox" />PMIDs</li>
-                                        <li><input type="checkbox" />Source</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <ul class="top">
-                                <li>
-                                    <input type="checkbox" /><span>Function/Location</span>
-                                    <ul>
-                                        <li><input type="checkbox" />Biological Process (GO)</li>
-                                        <li><input type="checkbox" />Cellular Component (GO)</li>
-                                        <li><input type="checkbox" />Molecular Function (GO)</li>
-                                        <li><input type="checkbox" />Pathways (BioCarta)</li>
-                                        <li><input type="checkbox" />Pathways (KEGG)</li>
-                                        <li><input type="checkbox" />Pathways (PID)</li>
-                                        <li><input type="checkbox" />Pathways (WikiPathways)</li>
-                                        <li><input type="checkbox" />Pathways (Reactome)</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
+    <table>
+        <tr>
+            <td>
+                <form method="get">
+                    Enter either: 
+                <ul>
+                    <li>a single gene symbol</li>
+                    <li>a list of gene symbols, one per line</li>
+                </ul>
+                <textarea id="txtGeneList" name="search_terms" rows="8">{%if search_terms != None %}{{ search_terms }}{% endif %}</textarea>
+                <br />
+                <input type="submit" value="Search" style="margin-top:5px;">
+                <br><br>
+                <i>Current Search: {{ search_terms }}</i><br>
+            </form>
+        </td>
+            <td valign="top">
+                <div class="container section" style="margin-left:10px;max-width:2000px;">
+                    <div class="form-check" style="padding-left:10px;">
+                        <ul class="top">
+                            <li>		
+                                <span>Gene Information</span>
+                                <ul class="column-choices">
+                                    <li><input type="checkbox" data-column="0" data-table="0" checked/>Gene symbol</li>
+                                    <li><input type="checkbox" data-column="1" data-table="0" checked />Gene name</li>
+                                    <li><input type="checkbox" data-column="2" data-table="0" />Synonyms</li>
+                                    <li><input type="checkbox" data-column="3" data-table="0" checked />Gene Classes (HPA)</li>
+                                    <li><input type="checkbox" data-column="4" data-table="0" checked />Gene Categories (DGIdb)</li>
+                                    <li><input type="checkbox" data-column="5" data-table="0" checked />Gene Location</li>
+                                    <li><input type="checkbox" data-column="6" data-table="0" checked />Druggable</li>
+                                    <li><input type="checkbox" data-column="7" data-table="0" />Enzyme</li>
+                                    <li><input type="checkbox" data-column="8" data-table="0" />Kinase</li>
+                                    <li><input type="checkbox" data-column="9" data-table="0" />Transcription Factor</li>
+                                    <li><input type="checkbox" data-column="10" data-table="0" />Secreted</li>
+                                    <li><input type="checkbox" data-column="11" data-table="0" />Transmembrane</li>
+                                    <li><input type="checkbox" data-column="12" data-table="0" />HGNC ID</li>
+                                    <li><input type="checkbox" data-column="13" data-table="0" />Entrez ID</li>
+                                    <li><input type="checkbox" data-column="14" data-table="0" />Ensembl ID</li>
+                                    <li><input type="checkbox" data-column="15" data-table="0" />UniProt ID</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="top">
+                            <li>
+                                <input type="checkbox" /><span>Drug Targets</span>
+                                <ul class="column-choices-ajax">
+                                    <li><input type="checkbox" data-column="0" data-table="1" checked />DrugBank ID</li>
+                                    <li><input type="checkbox" data-column="1" data-table="1" checked />Drug Name</li>
+                                    <li><input type="checkbox" data-column="2" data-table="1" checked />Brand Names</li>
+                                    <li><input type="checkbox" data-column="3" data-table="1" checked />Drug Synonyms</li>
+                                    <li><input type="checkbox" data-column="4" data-table="1" checked />Actions</li>
+                                    <li><input type="checkbox" data-column="5" data-table="1" />Source</li>
+                                </ul>
+                            </li>
+                        </ul>			<ul class="top">
+                            <li>
+                                <input type="checkbox" /><span>Diseases</span>
+                                <ul class="column-choices-ajax">
+                                    <li><input type="checkbox" data-column="0" data-table="2" checked />Disease</li>
+                                    <li><input type="checkbox" data-column="1" data-table="2" checked />Disease ID</li>
+                                    <li><input type="checkbox" data-column="2" data-table="2" checked />Source</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="top">
+                            <li>
+                                <input type="checkbox" /><span>Protein Interactions</span>
+                                <ul class="column-choices-ajax">
+                                    <li><input type="checkbox" data-column="0" data-table="3" checked />Gene 1 Symbol</li>
+                                    <li><input type="checkbox" data-column="1" data-table="3" checked />Gene 2 Symbol</li>
+                                    <li><input type="checkbox" data-column="2" data-table="3" checked />Score (HIPPIE)</li>
+                                    <li><input type="checkbox" data-column="3" data-table="3" checked />Score (STRING)</li>
+                                    <li><input type="checkbox" data-column="4" data-table="3" checked />Experiments</li>
+                                    <li><input type="checkbox" data-column="5" data-table="3" checked />In Vivo/In Vitro</li>
+                                    <li><input type="checkbox" data-column="6" data-table="3" checked />PMIDs</li>
+                                    <li><input type="checkbox" data-column="7" data-table="3" checked />Source</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="top">
+                            <li>
+                                <input type="checkbox" /><span>Function/Location</span>
+                                <ul>
+                                    <li><input type="checkbox" />Biological Process (GO)</li>
+                                    <li><input type="checkbox" />Cellular Component (GO)</li>
+                                    <li><input type="checkbox" />Molecular Function (GO)</li>
+                                    <li><input type="checkbox" />Pathways (BioCarta)</li>
+                                    <li><input type="checkbox" />Pathways (KEGG)</li>
+                                    <li><input type="checkbox" />Pathways (PID)</li>
+                                    <li><input type="checkbox" />Pathways (WikiPathways)</li>
+                                    <li><input type="checkbox" />Pathways (Reactome)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
 
-                    </div>               
-                </td>
-            </tr>
-        </table>        
+                </div>               
+            </td>
+        </tr>
+    </table>        
 
     {% if search_terms %}
     <div id="resultsGrid" style="display:none;">
@@ -141,6 +181,7 @@
                     <th>UniProt ID</th>
                 </tr>
             </thead>
+            <tbody>
             {% for search_result in genelist %}
             <tr id='tr{{search_result.gene_info.gene_symbol}}'>
                 <td><a href="https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/{{ search_result.gene_info.hgnc_id }}" target="_blank">{{ search_result.gene_info.gene_symbol }}</a></td>
@@ -160,18 +201,37 @@
                 <td><a href="https://uswest.ensembl.org/Homo_sapiens/Gene/Summary?g={{ search_result.gene_info.ensembl_id }}" target="_blank">{{ search_result.gene_info.ensembl_id }}</a></td>
                 <td><a href="https://www.uniprot.org/uniprot/{{ search_result.gene_info.uniprot_id }}" target="_blank">{{ search_result.gene_info.uniprot_id }}</a></td>
             </tr>
-
-                <!-- <b>Protein Interactions</b>
-                {% for interaction in search_result.protein_interactions %}
-                    <div>{{ interaction.geneSymbol2 }}</div>
-                {% endfor %} -->
             {% endfor %}
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Gene Symbol</td>
+                    <td>Gene Name</td>
+                    <td>Synonyms</td>
+                    <td>Protein Classes</td>
+                    <td>Gene Category</td>
+                    <td>Gene Location</td>
+                    <td>Druggable</td>
+                    <td>Enzyme</td>
+                    <td>Kinase</td>
+                    <td>Transcription Factor</td>
+                    <td>Secreted</td>
+                    <td>Transmembrane</td>
+                    <td>HGNC ID</td>
+                    <td>Entrez ID</td>
+                    <td>Ensembl ID</td>
+                    <td>UniProt ID</td>
+                </tr>
+            </tfoot>    
+            
+
         </table>
-        {% for search_result in genelist %}
-        <div class="subtable g{{search_result.gene_info.gene_symbol}}">
+
+        <div class="subtables">
             <hr/>
             <h5>Drug Targets</h5>
-            <table class="table grid" style="width:100%">
+            <table id="tblDrugTargets" class="table" style="width:100%">
                 <thead>
                     <tr>
                         <th>DrugBank ID</th>
@@ -182,45 +242,26 @@
                         <th>Source</th>
                     </tr>
                 </thead>
-                {% for drug_target in search_result.drug_targets %}
-                <tr>
-                    <td><a href='https://go.drugbank.com/drugs/{{drug_target.drugbank_id}}' target="_blank">{{ drug_target.drugbank_id }}</a></td>
-                    <td>{{ drug_target.drug_name }}</td>
-                    <td>{{ drug_target.brand_names }}</td>
-                    <td>{{ drug_target.synonyms }}</td>
-                    <td>{{ drug_target.actions }}</td>
-                    <td>{{ drug_target.source }}</td>
-                </tr>       
-                {% endfor %}
+                <!-- TBODY GOES HERE -->
             </table>
-        </div>
-        {% endfor %}
 
-        {% for search_result in genelist %}
-        <div class="subtable g{{search_result.gene_info.gene_symbol}}">
             <hr/>
-            <h5>Phenotype/Disease (COMING SOON)</h5>
-            <table class="table grid subtable g{{search_result.gene_info.gene_symbol}}" style="width:100%">
+
+            <h5>Diseases</h5>
+            <table id="tblDiseases" class="table" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Condition</th>
-                        <th>Term Name</th>
-                        <th style="width:30px">Score</th>
-                        <th>Experiments</th>
+                        <th>Disease Name</th>
+                        <th>Disease ID</th>
                         <th>Source</th>
                     </tr>
                 </thead>
-                {% for interaction in search_result.protein_interactions %}
-                {% endfor %}
             </table>
-        </div>
-        {% endfor %}
 
-        {% for search_result in genelist %}
-        <div class="subtable g{{search_result.gene_info.gene_symbol}}">
             <hr/>
+
             <h5>Protein Interactions</h5>
-            <table class="table grid subtable g{{search_result.gene_info.gene_symbol}}" style="width:100%">
+            <table id="tblProteinInteractions" class="table" style="width:100%">
                 <thead>
                     <tr>
                         <th>Gene 1</th>
@@ -233,37 +274,23 @@
                         <th>Source</th>
                     </tr>
                 </thead>
-                {% for interaction in search_result.protein_interactions %}
-                <tr>
-                    <td>{{ interaction.geneSymbol1 }} ({{ interaction.geneName1 }})</td>
-                    <td>{{ interaction.geneSymbol2 }} ({{ interaction.geneName2 }})</td>
-                    <td>{{ interaction.hippie_score }}</td>
-                    <td>{{ interaction.string_score }}</td>
-                    <td>{{ interaction.experiments }}</td>
-                    <td>{{ interaction.in_vivo_in_vitro }}</td>
-                    <td>{{ interaction.pmids }}</td>
-                    <td>{{ interaction.source }}</td>
-                </tr>       
-                {% endfor %}
             </table>
-        </div>
-        {% endfor %}
 
-        {% for search_result in genelist %}
-        <div class="subtable g{{search_result.gene_info.gene_symbol}}">
             <hr/>
+
             <h5>Function/Pathway (COMING SOON)</h5>
-            <table class="table grid subtable g{{search_result.gene_info.gene_symbol}}" style="width:100%">
+            <table class="table grid" style="width:100%">
                 <thead>
                     <tr>
                         <th>Condition</th>
                     </tr>
                 </thead>
-                {% for interaction in search_result.protein_interactions %}
-                {% endfor %}
             </table>
+
         </div>
-        {% endfor %}
+
+        <div class="subtable g{{search_result.gene_info.gene_symbol}}">
+        </div>
     </div>
 
     {% endif %}
@@ -280,21 +307,46 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"/>
 
 <script type="text/javascript">
+    tables = []
     tblGenes = null;
+    tblDrugTargets = null;
+    tblDiseases = null;
+    tblProteinInteractions = null;
 
     $(document).ready(function() {
-        showTables('')
-        
-        tblGenes = $('#tblGenes').DataTable({
-            "searching": true
+        $('.subtables').hide();
+
+        $('#tblGenes tfoot td').each( function () {
+            var title = $(this).text();
+            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
         } );
+
+        tblGenes = $('#tblGenes').DataTable({
+            "searching": false,
+            initComplete: function () {
+            // Apply the search
+            this.api().columns().every( function () {
+                var that = this;
+ 
+                $( 'input', this.footer() ).on( 'keyup change clear', function () {
+                    if ( that.search() !== this.value ) {
+                        that
+                            .search( this.value )
+                            .draw();
+                    }
+                } );
+            } );
+        }
+        } );
+        tables.push(tblGenes);
+
         $('.grid').DataTable({
             "searching": true
         } );
 
         // Initialize the columns
-        $('input[type="checkbox"]', "#ulGeneInfo-details").each(function(index) {
-            setColumnVis($(this))
+        $('input[type="checkbox"]', ".column-choices").each(function(index) {
+            setColumnVis(tables[$(this).data('table')], $(this))
         });
 
         $('#tblGenes tbody').on( 'click', 'tr', function () {
@@ -315,21 +367,96 @@
 
         // Handle checkbox click even for columns showing/hiding
         $('input[type="checkbox"]').on( 'click', function (e) {
-            setColumnVis($(this))
+            setColumnVis(tables[$(this).data('table')], $(this))
         } );
 
         $('#resultsGrid').show();
     } );
 
-    var setColumnVis = function(cb) {
-        var column = tblGenes.column( cb.attr('data-column') );
+    var setColumnVis = function(tbl, cb) {
+        var column = tbl.column( cb.attr('data-column') );
         isChecked = cb.is(':checked')
         column.visible(isChecked);
     }
 
     var showTables = function(symbol) {
-        $('.subtable').hide();
-        $('.g' + symbol).show();
+        geneSelected(symbol);
     }
+
+    var geneSelected = function(symbol) {
+        tables = tables.slice(0, 1);
+        $.ajax({
+            url: 'ajax/gene_details/',
+            data: {
+                'gene_symbol': symbol
+            },
+            dataType: 'json',
+            beforeSend: function () { // Before we send the request, remove the .hidden class from the spinner and default to inline-block.
+                $('.subtables').hide();
+                $("#overlay").fadeIn(300);　
+            },
+            complete: function () { // Set our complete callback, adding the .hidden class and hiding the spinner.
+                $("#overlay").fadeOut(300);
+            },
+            success: function (d) { 
+                //console.log(d);
+                tblDrugTargets = $('#tblDrugTargets').DataTable({
+                    searching: false,
+                    destroy: true,
+                    data: d["drug_targets"],
+                    columns: [
+                        { data: "drugbank_id", render: function(data, type, row, meta) { return '<a href="https://go.drugbank.com/drugs/' + data + '" target="_blank">' + data + '</a>' }  },
+                        { data: "drug_name" },
+                        { data: "brand_names", width:"30%" },
+                        { data: "synonyms", width:"30%" },
+                        { data: "actions" },
+                        { data: "source" }
+                    ]
+                } );
+                tables.push(tblDrugTargets);
+
+                tblDiseases = $('#tblDiseases').DataTable({
+                    searching: false,
+                    destroy: true,
+                    data: d["diseases"],
+                    columns: [
+                        { data: "disease_name", render: function(data, type, row, meta) { 
+                            if(row["concept_id"] != null)
+                                return "<a href='https://www.ncbi.nlm.nih.gov/medgen/" + row["concept_id"] + "' target='_blank'>" + data + "</a>";
+                            return data
+                         } 
+                        },
+                        { data: "disease_id" },
+                        { data: "source" }
+                    ]
+                } );
+                tables.push(tblDiseases);
+
+                tblProteinInteractions = $('#tblProteinInteractions').DataTable({
+                    searching: false,
+                    destroy: true,
+                    data: d["protein_interactions"],
+                    columns: [
+                        { data: "geneSymbol1", render: function(data, type, row, meta) { return data + " (" + row["geneName1"] + ")"  } },
+                        { data: "geneSymbol2", render: function(data, type, row, meta) { return data + " (" + row["geneName2"] + ")" } },
+                        { data: "hippie_score" },
+                        { data: "string_score" },
+                        { data: "experiments" },
+                        { data: "in_vivo_in_vitro" },
+                        { data: "pmids" },
+                        { data: "source" }
+                    ]
+                } );
+                tables.push(tblProteinInteractions);
+
+                $('input[type="checkbox"]', ".column-choices-ajax").each(function(index) {
+                    setColumnVis(tables[$(this).data('table')], $(this))
+                });
+
+                $('.subtables').show();
+            },
+            error: function(e) { alert('an ajax error occurred: ' + e.statusText); }
+        });
+        }
 </script>
 
