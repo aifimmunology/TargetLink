@@ -61,17 +61,17 @@
             <td>
                 <form method="get">
                     Enter either: 
-                <ul>
-                    <li>a single gene symbol</li>
-                    <li>a list of gene symbols, one per line</li>
-                </ul>
-                <textarea id="txtGeneList" name="search_terms" rows="8">{%if search_terms != None %}{{ search_terms }}{% endif %}</textarea>
-                <br />
-                <input type="submit" value="Search" style="margin-top:5px;">
-                <br><br>
-                <i>Current Search: {{ search_terms }}</i><br>
-            </form>
-        </td>
+                    <ul>
+                        <li>a single gene symbol</li>
+                        <li>a list of gene symbols, one per line</li>
+                    </ul>
+                    <textarea id="txtGeneList" name="search_terms" rows="8">{%if search_terms != None %}{{ search_terms }}{% endif %}</textarea>
+                    <br />
+                    <input type="submit" value="Search" style="margin-top:5px;">
+                    <br><br>
+                    <i>Current Search: {{ search_terms }}</i><br>
+                </form>
+            </td>
             <td valign="top">
                 <div class="container section" style="margin-left:10px;max-width:2000px;">
                     <div class="form-check" style="padding-left:10px;">
@@ -124,8 +124,8 @@
                             <li>
                                 <input type="checkbox" /><span>Protein Interactions</span>
                                 <ul class="column-choices-ajax">
-                                    <li><input type="checkbox" data-column="0" data-table="3" checked />Gene 1 Symbol</li>
-                                    <li><input type="checkbox" data-column="1" data-table="3" checked />Gene 2 Symbol</li>
+                                    <li><input type="checkbox" data-column="0" data-table="3" />Primary Gene</li>
+                                    <li><input type="checkbox" data-column="1" data-table="3" checked />Interacting Gene</li>
                                     <li><input type="checkbox" data-column="2" data-table="3" checked />Score (HIPPIE)</li>
                                     <li><input type="checkbox" data-column="3" data-table="3" checked />Score (STRING)</li>
                                     <li><input type="checkbox" data-column="4" data-table="3" checked />Experiments</li>
@@ -159,6 +159,7 @@
 
     {% if search_terms %}
     <div id="resultsGrid" style="display:none;">
+        <input type="submit" value="Download Data" style="margin:5px 0;">
         <h5>Matching Genes</h5>
         <table id="tblGenes" class="table" style="width:100%">
             <thead>
@@ -184,13 +185,13 @@
             <tbody>
             {% for search_result in genelist %}
             <tr id='tr{{search_result.gene_info.gene_symbol}}'>
-                <td><a href="https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/{{ search_result.gene_info.hgnc_id }}" target="_blank">{{ search_result.gene_info.gene_symbol }}</a></td>
+                <td style="width:7%"><a href="https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/{{ search_result.gene_info.hgnc_id }}" target="_blank">{{ search_result.gene_info.gene_symbol }}</a></td>
                 <td>{{ search_result.gene_info.approved_name }}</td>
                 <td>{{ search_result.gene_info.synonyms }}</td>
                 <td>{{ search_result.gene_info.protein_class }}</td>
                 <td>{{ search_result.gene_info.categories }}</td>
-                <td>{{ search_result.gene_info.chromosome }}</td>
-                <td>{{ search_result.gene_info.druggable }}</td>
+                <td style="width:7%">{{ search_result.gene_info.chromosome }}</td>
+                <td style="width:7%">{{ search_result.gene_info.druggable }}</td>
                 <td>{{ search_result.gene_info.enzyme }}</td>
                 <td>{{ search_result.gene_info.kinase }}</td>
                 <td>{{ search_result.gene_info.transcription_factor }}</td>
@@ -264,8 +265,8 @@
             <table id="tblProteinInteractions" class="table" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Gene 1</th>
-                        <th>Gene 2</th>
+                        <th>Primary Gene</th>
+                        <th>Interacting Gene</th>
                         <th>HIPPIE Score</th>
                         <th>STRING Score</th>
                         <th>Experiments</th>
@@ -278,11 +279,12 @@
 
             <hr/>
 
-            <h5>Function/Pathway (COMING SOON)</h5>
-            <table class="table grid" style="width:100%">
+            <h5>Pathways</h5>
+            <table id="tblPathways" class="table grid" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Condition</th>
+                        <th>Pathway</th>
+                        <th>Source</th>
                     </tr>
                 </thead>
             </table>
@@ -322,21 +324,23 @@
         } );
 
         tblGenes = $('#tblGenes').DataTable({
-            "searching": false,
-            initComplete: function () {
-            // Apply the search
-            this.api().columns().every( function () {
-                var that = this;
+            "searching": true,
  
-                $( 'input', this.footer() ).on( 'keyup change clear', function () {
-                    if ( that.search() !== this.value ) {
-                        that
-                            .search( this.value )
-                            .draw();
-                    }
+            initComplete: function () {
+                // Apply the search
+                this.api().columns().every( function () {
+                    var that = this;
+    
+                    $('input', this.footer() ).on( 'keyup change clear', function () {
+                        console.log('searching: ' + this.value)
+                        if ( that.search() !== this.value ) {
+                            that
+                                .search( this.value )
+                                .draw();
+                        }
+                    } );
                 } );
-            } );
-        }
+            }
         } );
         tables.push(tblGenes);
 
@@ -401,7 +405,7 @@
             success: function (d) { 
                 //console.log(d);
                 tblDrugTargets = $('#tblDrugTargets').DataTable({
-                    searching: false,
+                    searching: true,
                     destroy: true,
                     data: d["drug_targets"],
                     columns: [
@@ -416,7 +420,7 @@
                 tables.push(tblDrugTargets);
 
                 tblDiseases = $('#tblDiseases').DataTable({
-                    searching: false,
+                    searching: true,
                     destroy: true,
                     data: d["diseases"],
                     columns: [
@@ -433,7 +437,7 @@
                 tables.push(tblDiseases);
 
                 tblProteinInteractions = $('#tblProteinInteractions').DataTable({
-                    searching: false,
+                    searching: true,
                     destroy: true,
                     data: d["protein_interactions"],
                     columns: [
@@ -448,6 +452,17 @@
                     ]
                 } );
                 tables.push(tblProteinInteractions);
+
+                tblPathways = $('#tblPathways').DataTable({
+                    searching: true,
+                    destroy: true,
+                    data: d["pathways"],
+                    columns: [
+                        { data: "pathway", render: function(data, type, row, meta) {return "<a href='" + row["url"] + "' target='_blank'>" + data + "</a>"} },
+                        { data: "source" }
+                    ]
+                } );
+                tables.push(tblPathways);
 
                 $('input[type="checkbox"]', ".column-choices-ajax").each(function(index) {
                     setColumnVis(tables[$(this).data('table')], $(this))

@@ -212,7 +212,7 @@ class MsigdbPathways(models.Model):
     hgnc_id = models.TextField(db_column='HGNC_ID', blank=True, null=True)  # Field name made lowercase.
     pathway = models.TextField(db_column='Pathway', blank=True, null=True)  # Field name made lowercase.
     url = models.TextField(db_column='URL', blank=True, null=True)  # Field name made lowercase.
-    gene = models.TextField(db_column='Gene', blank=True, null=True)  # Field name made lowercase.
+    gene_symbol = models.TextField(db_column='gene_symbol', blank=True, null=True)  # Field name made lowercase.
     source = models.TextField(db_column='Source', blank=True, null=True)  # Field name made lowercase.
     source_date = models.IntegerField(db_column='Source_Date', blank=True, null=True)  # Field name made lowercase.
     download_date = models.IntegerField(db_column='Download_Date', blank=True, null=True)  # Field name made lowercase.

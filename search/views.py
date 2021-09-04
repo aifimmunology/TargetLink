@@ -4,7 +4,7 @@ from django.views import generic
 from django.http import HttpResponse
 from django.http import JsonResponse
 
-from search.models import vwGeneInfo, vwDrugTargets, vwDiseases, vwProteinInteractions
+from search.models import vwGeneInfo, vwDrugTargets, vwDiseases, vwProteinInteractions, MsigdbPathways
 
 def index(request):
     # print("genelist:", genelist)
@@ -29,7 +29,8 @@ def gene_details(request):
     data = {
         'drug_targets': list(vwDrugTargets.objects.filter(gene_symbol = symbol).values()),
         'diseases': list(vwDiseases.objects.filter(gene_symbol = symbol).values()),
-        'protein_interactions': list(vwProteinInteractions.objects.filter(geneSymbol1 = symbol).values())
+        'protein_interactions': list(vwProteinInteractions.objects.filter(geneSymbol1 = symbol).values()),
+        'pathways': list(MsigdbPathways.objects.filter(gene_symbol = symbol).values())
     }
 
     return JsonResponse(data)
