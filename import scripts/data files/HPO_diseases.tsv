@@ -1,0 +1,5 @@
+	HGNC_ID	Gene_symbol	Disease_ID	Disease_name	Source	Source_Date	Download_Date
+0	HGNC:23336	A2ML1	OMIM:166760	Otitis Media, Susceptibility To	DrugBank	20210910	20210910
+1	HGNC:23336	A2ML1	ORPHA:648	Noonan Syndrome	DrugBank	20210910	20210910
+2	HGNC:13666	AAAS	OMIM:231550	Achalasia-addisonianism-alacrima Syndrome	DrugBank	20210910	20210910
+3	HGNC:13666	AAAS	ORPHA:869	Triple A Syndrome	DrugBank	20210910	20210910

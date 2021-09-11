@@ -1,0 +1,64 @@
+	DrugBank_ID	HGNC_ID	Drug_Name	Target	Actions	UniProt_ID	Gene_symbol	Source	Source_Date	Download_Date
+0	DB00001	HGNC:3535	Lepirudin	Prothrombin	Inhibitor	P00734	F2	DrugBank	20210909	20210909
+1	DB00002	HGNC:3236	Cetuximab	Epidermal growth factor receptor	Binder	P00533	EGFR	DrugBank	20210909	20210909
+2	DB00002	HGNC:3620	Cetuximab	Low affinity immunoglobulin gamma Fc region receptor III-B	Binder	O75015	FCGR3B	DrugBank	20210909	20210909
+3	DB00002	HGNC:1241	Cetuximab	Complement C1q subcomponent subunit A	Binder	P02745	C1QA	DrugBank	20210909	20210909
+4	DB00002	HGNC:1242	Cetuximab	Complement C1q subcomponent subunit B	Binder	P02746	C1QB	DrugBank	20210909	20210909
+5	DB00002	HGNC:1245	Cetuximab	Complement C1q subcomponent subunit C	Binder	P02747	C1QC	DrugBank	20210909	20210909
+6	DB00002	HGNC:3619	Cetuximab	Low affinity immunoglobulin gamma Fc region receptor III-A	Binder	P08637	FCGR3A	DrugBank	20210909	20210909
+7	DB00002	HGNC:3613	Cetuximab	High affinity immunoglobulin gamma Fc receptor I	Binder	P12314	FCGR1A	DrugBank	20210909	20210909
+8	DB00002	HGNC:3616	Cetuximab	Low affinity immunoglobulin gamma Fc region receptor II-a	Binder	P12318	FCGR2A	DrugBank	20210909	20210909
+9	DB00003	HGNC:12811	Dornase alfa	DNA				DrugBank	20210909	20210909
+10	DB00004	HGNC:6008	Denileukin diftitox	Interleukin-2 receptor subunit alpha	Binder	P01589	IL2RA	DrugBank	20210909	20210909
+11	DB00004	HGNC:6009	Denileukin diftitox	Interleukin-2 receptor subunit beta	Agonist	P14784	IL2RB	DrugBank	20210909	20210909
+12	DB00004	HGNC:6010	Denileukin diftitox	Cytokine receptor common subunit gamma		P31785	IL2RG	DrugBank	20210909	20210909
+13	DB00005	HGNC:11892	Etanercept	Tumor necrosis factor	Antibody	P01375	TNF	DrugBank	20210909	20210909
+14	DB00005	HGNC:3613	Etanercept	High affinity immunoglobulin gamma Fc receptor I	Ligand	P12314	FCGR1A	DrugBank	20210909	20210909
+15	DB00005	HGNC:3616	Etanercept	Low affinity immunoglobulin gamma Fc region receptor II-a	Ligand	P12318	FCGR2A	DrugBank	20210909	20210909
+16	DB00005	HGNC:3618	Etanercept	Low affinity immunoglobulin gamma Fc region receptor II-b	Ligand	P31994	FCGR2B	DrugBank	20210909	20210909
+17	DB00005	HGNC:15626	Etanercept	Low affinity immunoglobulin gamma Fc region receptor II-c	Ligand	P31995	FCGR2C	DrugBank	20210909	20210909
+18	DB00005	HGNC:3619	Etanercept	Low affinity immunoglobulin gamma Fc region receptor III-A	Ligand	P08637	FCGR3A	DrugBank	20210909	20210909
+19	DB00005	HGNC:3620	Etanercept	Low affinity immunoglobulin gamma Fc region receptor III-B	Ligand	O75015	FCGR3B	DrugBank	20210909	20210909
+20	DB00005	HGNC:6709	Etanercept	Lymphotoxin-alpha	Antibody	P01374	LTA	DrugBank	20210909	20210909
+21	DB00005	HGNC:12811	Etanercept	Complement component 1q (C1q) (Protein Group)	Ligand			DrugBank	20210909	20210909
+22	DB00006	HGNC:3535	Bivalirudin	Prothrombin	Inhibitor	P00734	F2	DrugBank	20210909	20210909
+23	DB00006	HGNC:7218	Bivalirudin	Myeloperoxidase	Inhibitor	P05164	MPO	DrugBank	20210909	20210909
+24	DB00007	HGNC:4421	Leuprolide	Gonadotropin-releasing hormone receptor	Agonist	P30968	GNRHR	DrugBank	20210909	20210909
+25	DB00008	HGNC:5433	Peginterferon alfa-2a	Interferon alpha/beta receptor 2	Agonist	P48551	IFNAR2	DrugBank	20210909	20210909
+26	DB00008	HGNC:5432	Peginterferon alfa-2a	Interferon alpha/beta receptor 1	Agonist	P17181	IFNAR1	DrugBank	20210909	20210909
+27	DB00008	HGNC:2596	Peginterferon alfa-2a	Cytochrome P450 1A2	Inhibitor	P05177	CYP1A2	DrugBank	20210909	20210909
+28	DB00009	HGNC:9071	Alteplase	Plasminogen	Activator	P00747	PLG	DrugBank	20210909	20210909
+29	DB00009	HGNC:3661	Alteplase	Fibrinogen alpha chain		P02671	FGA	DrugBank	20210909	20210909
+30	DB00009	HGNC:9053	Alteplase	Urokinase plasminogen activator surface receptor		Q03405	PLAUR	DrugBank	20210909	20210909
+31	DB00009	HGNC:8583	Alteplase	Plasminogen activator inhibitor 1		P05121	SERPINE1	DrugBank	20210909	20210909
+32	DB00010	HGNC:4266	Sermorelin	Growth hormone-releasing hormone receptor	Agonist	Q02643	GHRHR	DrugBank	20210909	20210909
+33	DB00011	HGNC:5432	Interferon alfa-n1	Interferon alpha/beta receptor 1	Agonist	P17181	IFNAR1	DrugBank	20210909	20210909
+34	DB00011	HGNC:5433	Interferon alfa-n1	Interferon alpha/beta receptor 2	Agonist	P48551	IFNAR2	DrugBank	20210909	20210909
+35	DB00011	HGNC:2596	Interferon alfa-n1	Cytochrome P450 1A2	Inhibitor	P05177	CYP1A2	DrugBank	20210909	20210909
+36	DB00012	HGNC:3416	Darbepoetin alfa	Erythropoietin receptor	Agonist	P19235	EPOR	DrugBank	20210909	20210909
+37	DB00013	HGNC:9071	Urokinase	Plasminogen	Activator	P00747	PLG	DrugBank	20210909	20210909
+38	DB00013	HGNC:9053	Urokinase	Urokinase plasminogen activator surface receptor		Q03405	PLAUR	DrugBank	20210909	20210909
+39	DB00013	HGNC:8583	Urokinase	Plasminogen activator inhibitor 1		P05121	SERPINE1	DrugBank	20210909	20210909
+40	DB00013	HGNC:8584	Urokinase	Plasminogen activator inhibitor 2		P05120	SERPINB2	DrugBank	20210909	20210909
+41	DB00013	HGNC:8723	Urokinase	Plasma serine protease inhibitor	Substrate	P05154	SERPINA5	DrugBank	20210909	20210909
+42	DB00013	HGNC:6694	Urokinase	Low-density lipoprotein receptor-related protein 2	Substrate	P98164	LRP2	DrugBank	20210909	20210909
+43	DB00013	HGNC:11344	Urokinase	Suppressor of tumorigenicity 14 protein	Substrate	Q9Y5Y6	ST14	DrugBank	20210909	20210909
+44	DB00013	HGNC:7821	Urokinase	Nidogen-1	Ligand	P14543	NID1	DrugBank	20210909	20210909
+45	DB00013	HGNC:7158	Urokinase	Macrophage metalloelastase	Substrate	P39900	MMP12	DrugBank	20210909	20210909
+46	DB00014	HGNC:6585	Goserelin	Lutropin-choriogonadotropic hormone receptor	Agonist	P22888	LHCGR	DrugBank	20210909	20210909
+47	DB00014	HGNC:4421	Goserelin	Gonadotropin-releasing hormone receptor	Agonist	P30968	GNRHR	DrugBank	20210909	20210909
+48	DB00015	HGNC:9071	Reteplase	Plasminogen	Activator	P00747	PLG	DrugBank	20210909	20210909
+49	DB00015	HGNC:3661	Reteplase	Fibrinogen alpha chain		P02671	FGA	DrugBank	20210909	20210909
+50	DB00015	HGNC:8583	Reteplase	Plasminogen activator inhibitor 1		P05121	SERPINE1	DrugBank	20210909	20210909
+51	DB00016	HGNC:3416	Erythropoietin	Erythropoietin receptor	Agonist	P19235	EPOR	DrugBank	20210909	20210909
+52	DB00017	HGNC:1440	Salmon calcitonin	Calcitonin receptor	Agonist	P30988	CALCR	DrugBank	20210909	20210909
+53	DB00018	HGNC:5432	Interferon alfa-n3	Interferon alpha/beta receptor 1	Agonist	P17181	IFNAR1	DrugBank	20210909	20210909
+54	DB00018	HGNC:5433	Interferon alfa-n3	Interferon alpha/beta receptor 2	Agonist	P48551	IFNAR2	DrugBank	20210909	20210909
+55	DB00018	HGNC:2596	Interferon alfa-n3	Cytochrome P450 1A2	Inhibitor	P05177	CYP1A2	DrugBank	20210909	20210909
+56	DB00019	HGNC:2439	Pegfilgrastim	Granulocyte colony-stimulating factor receptor	Agonist	Q99062	CSF3R	DrugBank	20210909	20210909
+57	DB00019	HGNC:3309	Pegfilgrastim	Neutrophil elastase	Substrate	P08246	ELANE	DrugBank	20210909	20210909
+58	DB00020	HGNC:2435	Sargramostim	Granulocyte-macrophage colony-stimulating factor receptor subunit alpha	Agonist	P15509	CSF2RA	DrugBank	20210909	20210909
+59	DB00020	HGNC:6012	Sargramostim	Interleukin-3 receptor subunit alpha	Agonist	P26951	IL3RA	DrugBank	20210909	20210909
+60	DB00020	HGNC:2436	Sargramostim	Cytokine receptor common subunit beta	Agonist	P32927	CSF2RB	DrugBank	20210909	20210909
+61	DB00020	HGNC:10659	Sargramostim	Syndecan-2	Agonist	P34741	SDC2	DrugBank	20210909	20210909
+62	DB00020	HGNC:9362	Sargramostim	Bone marrow proteoglycan		P13727	PRG2	DrugBank	20210909	20210909
