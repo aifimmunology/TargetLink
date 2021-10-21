@@ -1,4 +1,4 @@
-# TargetLink
+# TargetLink prototype
  Database of genes, drug targets, associated diseases, protein interactions, and other relationships
 
 The site was created in Django, so the first step you will probably need to do is install Django
